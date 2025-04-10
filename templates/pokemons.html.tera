@@ -1,0 +1,160 @@
+{% extends "layout" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="display-4 mb-2">Mes Pokémon</h1>
+            <p class="lead text-muted">Gérez vos Pokémon et leur entraînement</p>
+        </div>
+        <div class="text-end">
+            <span class="badge bg-primary p-2">
+                <i class="bi bi-pokemon me-1"></i>
+                {{ pokemons|length }} Pokémon
+            </span>
+        </div>
+    </div>
+
+    <!-- Formulaire d'ajout de Pokémon -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">
+                <i class="bi bi-plus-circle text-success me-2"></i>
+                Ajouter un nouveau Pokémon
+            </h5>
+            <form action="/pokemons/ajouter" method="POST" class="mt-3">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label for="nom" class="form-label">Nom</label>
+                        <input type="text" class="form-control" id="nom" name="nom" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="type_pokemon" class="form-label">Type</label>
+                        <select class="form-select" id="type_pokemon" name="type_pokemon" required>
+                            <option value="Feu">Feu</option>
+                            <option value="Eau">Eau</option>
+                            <option value="Plante">Plante</option>
+                            <option value="Electrik">Électrik</option>
+                            <option value="Normal">Normal</option>
+                            <option value="Psy">Psy</option>
+                            <option value="Combat">Combat</option>
+                            <option value="Poison">Poison</option>
+                            <option value="Sol">Sol</option>
+                            <option value="Vol">Vol</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="genre" class="form-label">Genre</label>
+                        <select class="form-select" id="genre" name="genre" required>
+                            <option value="Male">Mâle</option>
+                            <option value="Femelle">Femelle</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-plus-circle me-1"></i>Ajouter
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Formulaire d'entraînement global -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">
+                <i class="bi bi-lightning-charge-fill text-warning me-2"></i>
+                Entraînement global
+            </h5>
+            <p class="card-text text-muted">Entraînez tous vos Pokémon en même temps avec un nombre aléatoire d'XP.</p>
+            <form action="/entrainer/tous" method="POST" class="mt-3">
+                <input type="hidden" name="xp" value="0">
+                <button type="submit" class="btn btn-warning btn-lg w-100">
+                    <i class="bi bi-lightning-charge me-1"></i>Entraîner tous les Pokémon
+                </button>
+                <div class="form-text mt-2 text-center">
+                    <i class="bi bi-info-circle me-1"></i>
+                    Chaque Pokémon recevra un nombre aléatoire d'XP entre 10 et 100.
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Boutons de tri -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">
+                <i class="bi bi-sort-down text-primary me-2"></i>
+                Trier les Pokémon
+            </h5>
+            <div class="d-flex gap-2">
+                <a href="/pokemons/trier?critere=niveau" class="btn btn-primary">
+                    <i class="bi bi-sort-numeric-down me-1"></i>Trier par niveau
+                </a>
+                <a href="/pokemons/trier?critere=type" class="btn btn-primary">
+                    <i class="bi bi-sort-alpha-down me-1"></i>Trier par type
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Boutons de sauvegarde et chargement -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">
+                <i class="bi bi-save text-success me-2"></i>
+                Sauvegarde
+            </h5>
+            <div class="d-flex gap-2">
+                <form action="/pokemons/sauvegarder" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-save me-1"></i>Sauvegarder l'élevage
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        {% for pokemon in pokemons %}
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h5 class="card-title mb-0">{{ pokemon.nom }}</h5>
+                        <div>
+                            <span class="pokemon-type type-{{ pokemon.type_pokemon|lower }}">
+                                {{ pokemon.type_pokemon }}
+                            </span>
+                            <form action="/pokemons/supprimer/{{ loop.index0 }}" method="POST" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-danger ms-2" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce Pokémon ?')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="pokemon-info mb-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span><i class="bi bi-star-fill text-warning me-1"></i>Niveau {{ pokemon.niveau }}</span>
+                            <span><i class="bi bi-gender-ambiguous me-1"></i>{{ pokemon.genre }}</span>
+                        </div>
+                        
+                        <div class="progress mb-2">
+                            <div class="progress-bar" role="progressbar" 
+                                 style="width: {{ (pokemon.experience / (pokemon.niveau * 100)) * 100 }}%"
+                                 aria-valuenow="{{ pokemon.experience }}" 
+                                 aria-valuemin="0" 
+                                 aria-valuemax="{{ pokemon.niveau * 100 }}">
+                                {{ pokemon.experience }}/{{ pokemon.niveau * 100 }} XP
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %} 

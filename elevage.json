@@ -1,0 +1,88 @@
+{
+  "pokemons": [
+    {
+      "nom": "Machoc",
+      "niveau": 5,
+      "type_pokemon": "Combat",
+      "experience": 150,
+      "genre": "Male"
+    },
+    {
+      "nom": "Carapuce",
+      "niveau": 4,
+      "type_pokemon": "Eau",
+      "experience": 190,
+      "genre": "Femelle"
+    },
+    {
+      "nom": "Salamèche",
+      "niveau": 9,
+      "type_pokemon": "Feu",
+      "experience": 220,
+      "genre": "Male"
+    },
+    {
+      "nom": "Grodoudou",
+      "niveau": 5,
+      "type_pokemon": "Normal",
+      "experience": 170,
+      "genre": "Male"
+    },
+    {
+      "nom": "Bulbizarre",
+      "niveau": 1,
+      "type_pokemon": "Plante",
+      "experience": 180,
+      "genre": "Femelle"
+    },
+    {
+      "nom": "Nidoran",
+      "niveau": 5,
+      "type_pokemon": "Poison",
+      "experience": 200,
+      "genre": "Femelle"
+    },
+    {
+      "nom": "Mewtwo",
+      "niveau": 10,
+      "type_pokemon": "Psy",
+      "experience": 450,
+      "genre": "Male"
+    },
+    {
+      "nom": "Terra",
+      "niveau": 5,
+      "type_pokemon": "Sol",
+      "experience": 210,
+      "genre": "Femelle"
+    },
+    {
+      "nom": "Pidgey",
+      "niveau": 5,
+      "type_pokemon": "Vol",
+      "experience": 160,
+      "genre": "Male"
+    },
+    {
+      "nom": "Pikachu",
+      "niveau": 8,
+      "type_pokemon": "Electrik",
+      "experience": 250,
+      "genre": "Male"
+    },
+    {
+      "nom": "jeje",
+      "niveau": 5,
+      "type_pokemon": "Feu",
+      "experience": 0,
+      "genre": "Femelle"
+    },
+    {
+      "nom": "Pikachu Pharaon",
+      "niveau": 1,
+      "type_pokemon": "Feu",
+      "experience": 0,
+      "genre": "Femelle"
+    }
+  ]
+}

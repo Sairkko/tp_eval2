@@ -1,0 +1,92 @@
+{% extends "layout" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="display-4 mb-2">Reproduction</h1>
+            <p class="lead text-muted">Faites se reproduire vos Pokémon pour créer de nouvelles espèces</p>
+        </div>
+    </div>
+
+    {% if message %}
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <i class="bi bi-info-circle me-2"></i>
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+
+    <div class="row g-4">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">
+                        <i class="bi bi-heart text-danger me-2"></i>
+                        Sélectionnez les Pokémon à reproduire
+                    </h5>
+                    
+                    <form action="/reproduction" method="POST" class="reproduction-form">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label class="form-label">Premier Pokémon</label>
+                                <select name="pokemon1" class="form-select" required>
+                                    <option value="">Sélectionnez un Pokémon</option>
+                                    {% for pokemon in pokemons %}
+                                    <option value="{{ loop.index0 }}">
+                                        {{ pokemon.nom }} ({{ pokemon.type_pokemon }}) - Niveau {{ pokemon.niveau }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Second Pokémon</label>
+                                <select name="pokemon2" class="form-select" required>
+                                    <option value="">Sélectionnez un Pokémon</option>
+                                    {% for pokemon in pokemons %}
+                                    <option value="{{ loop.index0 }}">
+                                        {{ pokemon.nom }} ({{ pokemon.type_pokemon }}) - Niveau {{ pokemon.niveau }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-heart-fill me-2"></i>
+                                Lancer la reproduction
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="bi bi-info-circle text-primary me-2"></i>
+                        Conditions de reproduction
+                    </h5>
+                    <ul class="list-unstyled mt-3">
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i>
+                            Les Pokémon doivent être de même type
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i>
+                            Les Pokémon doivent être de genres opposés
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i>
+                            Les Pokémon doivent être au moins niveau 5
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

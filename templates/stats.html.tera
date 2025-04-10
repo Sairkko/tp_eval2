@@ -1,0 +1,65 @@
+{% extends "layout" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="display-4 mb-2">Statistiques</h1>
+            <p class="lead text-muted">Analysez les performances de votre élevage</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Carte des statistiques générales -->
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="bi bi-graph-up-arrow text-primary me-2"></i>
+                        Vue d'ensemble
+                    </h5>
+                    <div class="mt-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-muted">Total Pokémon</span>
+                            <span class="h4 mb-0">{{ total_pokemon }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-muted">Niveau moyen</span>
+                            <span class="h4 mb-0">{{ niveau_moyen }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte de répartition par type -->
+        <div class="col-md-8">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="bi bi-pie-chart text-primary me-2"></i>
+                        Répartition par type
+                    </h5>
+                    <div class="row mt-4">
+                        {% for type, count in types_count %}
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="pokemon-type type-{{ type|lower }}">{{ type }}</span>
+                                <div class="d-flex align-items-center">
+                                    <div class="progress flex-grow-1 me-2" style="height: 8px; width: 100px;">
+                                        <div class="progress-bar" role="progressbar" 
+                                             style="width: {{ (count / total_pokemon * 100)|round }}%">
+                                        </div>
+                                    </div>
+                                    <span class="badge bg-secondary">{{ count }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

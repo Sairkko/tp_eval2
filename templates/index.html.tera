@@ -1,0 +1,38 @@
+{% extends "layout" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Bienvenue dans votre élevage de Pokémon</h1>
+    <p>Gérez vos Pokémon et faites-les se reproduire pour créer de nouvelles espèces !</p>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Liste des Pokémon</h5>
+                    <p class="card-text">Consultez la liste complète de vos Pokémon et gérez leur entraînement.</p>
+                    <a href="/pokemons" class="btn btn-primary">Voir les Pokémon</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Statistiques</h5>
+                    <p class="card-text">Consultez les statistiques de votre élevage.</p>
+                    <a href="/stats" class="btn btn-primary">Voir les stats</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Reproduction</h5>
+                    <p class="card-text">Faites se reproduire vos Pokémon pour créer de nouvelles espèces.</p>
+                    <a href="/reproduction" class="btn btn-primary">Reproduction</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
